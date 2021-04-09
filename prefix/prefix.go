@@ -39,7 +39,10 @@ func (w *Writer) Write(p []byte) (n int, err error) {
 	}
 
 	p = bytes.ReplaceAll(p, []byte("\n"), []byte("\n"+w.Prefix))
+
+	// Check if we prefixed the end of a line.
 	if bytes.HasSuffix(p, []byte(w.Prefix)) {
+		// Remove the trailing prefix and add it to the next Write.
 		p = bytes.TrimSuffix(p, []byte(w.Prefix))
 		w.skipPrefix = false
 	}
