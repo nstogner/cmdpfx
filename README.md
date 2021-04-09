@@ -17,5 +17,5 @@ go install github.com/nstogner/cmdpfx
 ## Usage
 
 ```sh
-cmdpfx ./some-script.sh
+cmdpfx test/some-script.sh
 ```

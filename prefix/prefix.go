@@ -8,19 +8,21 @@ import (
 	"os/exec"
 )
 
-const split = " | "
+var Split = " | "
 
+// StartCommand runs a command to completion with Stdout and Stderr prefixed.
 func StartCommand(name string, args ...string) error {
 	c := exec.Command(name, args...)
-	c.Stdout = &Writer{Prefix: name + split, Writer: os.Stdout}
-	c.Stderr = &Writer{Prefix: name + split, Writer: os.Stderr}
+	c.Stdout = &Writer{Prefix: name + Split, Writer: os.Stdout}
+	c.Stderr = &Writer{Prefix: name + Split, Writer: os.Stderr}
 	if err := c.Run(); err != nil {
-		return fmt.Errorf("%s%s%w", name, split, err)
+		return fmt.Errorf("%s%s%w", name, Split, err)
 	}
 
 	return nil
 }
 
+// Writer prefixes newlines.
 type Writer struct {
 	Prefix     string
 	Writer     io.Writer
