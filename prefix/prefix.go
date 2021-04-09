@@ -10,8 +10,8 @@ import (
 
 var Split = " | "
 
-// StartCommand runs a command to completion with Stdout and Stderr prefixed.
-func StartCommand(name string, args ...string) error {
+// RunCommand runs a command to completion with Stdout and Stderr prefixed.
+func RunCommand(name string, args ...string) error {
 	c := exec.Command(name, args...)
 	c.Stdout = &Writer{Prefix: name + Split, Writer: os.Stdout}
 	c.Stderr = &Writer{Prefix: name + Split, Writer: os.Stderr}
